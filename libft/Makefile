@@ -6,7 +6,7 @@
 #    By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/03 14:05:38 by joaseque          #+#    #+#              #
-#    Updated: 2026/01/14 20:02:25 by joaseque         ###   ########.fr        #
+#    Updated: 2026/01/14 21:20:41 by joaseque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,7 @@ SRCS = 	ft_isalpha.c \
 		printf_dec.c \
 		printf_hex.c \
 		ft_printf.c \
-
-OBJS = $(SRCS:.c=.o)
-
-
-
-BONUS =	ft_lstnew_bonus.c \
+		ft_lstnew_bonus.c \
 		ft_lstadd_front_bonus.c \
 		ft_lstsize_bonus.c \
 		ft_lstlast_bonus.c \
@@ -70,7 +65,7 @@ BONUS =	ft_lstnew_bonus.c \
 		ft_lstiter_bonus.c \
 		ft_lstmap_bonus.c \
 
-BONUS_O = $(BONUS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
@@ -81,13 +76,9 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(BONUS_O)
+	$(RM) $(OBJS)
 fclean: clean
 	$(RM) $(NAME)
 re: fclean all
 
-
-bonus: $(OBJS) $(BONUS_O)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(BONUS_O)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
