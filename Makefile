@@ -1,35 +1,41 @@
 
-NAME = pipex.a
+NAME = pipex
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs
 RM = rm -fr
 
-LIBFT_DIR = ./LIB_FT
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC =	pipex.c \
+SRC =	src/pipex.c \
 		
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRC:.c=.o)
+
+INCLUDES = -Iincludes -I$(LIBFT_DIR)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	cp $(LIBFT) $(NAME)
-	$(AR) $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-%.o : %.c ft_printf.h
-	$(CC) $(CFLAGS) -c $< -o $@
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+
+%.o: %.c includes/pipex.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
+
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
+
 re: fclean all
 
 .PHONY: all clean fclean re
