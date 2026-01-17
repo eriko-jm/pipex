@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 20:26:49 by joaseque          #+#    #+#             */
-/*   Updated: 2026/01/14 21:24:10 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/01/15 18:12:30 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	int	j;
 	
 	i = 1;
-	if (argc == 3)
+	if (argc == 5)
 	{
 		j = 0;
 	}
