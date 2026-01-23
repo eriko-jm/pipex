@@ -14,12 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_cmd *cmd;
+	t_list *lst;
 	
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
 	if (argc != 5)
-		return (1);
+	{
+		perro("argumentos invalidos");
+		exit (1);
+	}
+	lst = NULL;
+	add_to_list(argv, &lst);
 	return (0);
 }

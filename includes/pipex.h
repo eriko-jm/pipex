@@ -19,11 +19,14 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
-# include <sys/wait.h>
+//# include <sys/wait.h>
+
+void	add_to_list(char **argv, t_list **lst);
 
 typedef struct s_cmd
 {
 	char	**arg;
+	char	*path;
 	pid_t	pid;
 	int		in_fd;
 	int		out_fd;
