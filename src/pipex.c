@@ -14,14 +14,25 @@
 
 int	main(int argc, char **argv)
 {
-	t_list *lst;
+	t_list	*lst;
+	t_pipex	*pipex;
 	
 	if (argc != 5)
 	{
-		perro("argumentos invalidos");
-		exit (1);
+		perro("argumentos");
+		return (1);
 	}
+	pipex = malloc(sizeof(t_pipex));
+	if (!pipex)
+		return (NULL);
 	lst = NULL;
-	add_to_list(argv, &lst);
+	make_list(argv, &lst);
+	open_files(pipex, argc, argv);
 	return (0);
+}
+
+void	open_files(t_pipex *pipex, int argc, char **argv)
+{
+	pipex->file1_fd = open_file1(argv);
+	pipex->file2_fd = open_file2(argc, argv);
 }

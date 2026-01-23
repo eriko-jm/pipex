@@ -21,7 +21,16 @@
 # include <string.h>
 //# include <sys/wait.h>
 
-void	add_to_list(char **argv, t_list **lst);
+void	make_list(char **argv, t_list **lst);
+int		open_file1(char **argv);
+int		open_file2(int argc, char **argv);
+void	open_files(t_pipex *pipex, int argc, char **argv);
+
+typedef	struct s_pipex
+{
+	int		file1_fd;
+	int		file2_fd;
+}	t_pipex;
 
 typedef struct s_cmd
 {

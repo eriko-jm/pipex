@@ -9,7 +9,7 @@ RM = rm -fr
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC =	src/pipex.c \
+SRC =	src/pipex.c src/parse.c src/processes.c \
 		
 
 OBJS = $(SRC:.c=.o)

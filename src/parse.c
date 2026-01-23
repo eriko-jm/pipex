@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	add_to_list(char **argv, t_list **lst)
+void	make_list(char **argv, t_list **lst)
 {
 	int		i;
 	t_cmd	*cmd;
@@ -32,7 +32,40 @@ void	add_to_list(char **argv, t_list **lst)
 			free (cmd);
 			return ;
 		}
-		ft_lstadd_front(lst, node);
+		ft_lstadd_back(lst, node);
 		i++;
 	}
+}
+int	open_file1(char **argv)
+{
+	int	fd;
+
+	if (access(argv[1], F_OK) == 0)
+	{
+		fd = open(argv[1], O_RDONLY | O_TRUNC, 0644);
+		if (fd < 0)
+		{
+			perror (argv[1]);
+			exit (1);
+		}		
+	}
+	else
+	{
+		perror (argv[1]);
+		exit (1);
+	}
+	return (fd);
+}
+
+int	open_file2(int argc, char **argv)
+{
+	int	fd;
+
+	fd = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (fd < 0)
+		{
+			perror (argv[argc - 1]);
+			exit (1);
+		}
+	return (fd);
 }
