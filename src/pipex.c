@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 20:26:49 by joaseque          #+#    #+#             */
-/*   Updated: 2026/01/15 18:12:30 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:23:28 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	int	i;
-	int	j;
+	t_cmd *cmd;
 	
-	i = 1;
-	if (argc == 5)
-	{
-		j = 0;
-	}
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	if (argc != 5)
+		return (1);
 	return (0);
 }

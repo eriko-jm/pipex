@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 20:26:39 by joaseque          #+#    #+#             */
-/*   Updated: 2026/01/23 15:38:00 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:01:42 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 # include <string.h>
 # include <sys/wait.h>
 
-typedef struct s_list
+typedef struct s_cmd
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	char	**arg;
+	pid_t	pid;
+	int		in_fd;
+	int		out_fd;
+}	t_cmd;
 
 #endif
