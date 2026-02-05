@@ -21,10 +21,7 @@
 # include <string.h>
 //# include <sys/wait.h>
 
-void	make_list(char **argv, t_list **lst);
-int		open_file1(char **argv);
-int		open_file2(int argc, char **argv);
-void	open_files(t_pipex *pipex, int argc, char **argv);
+
 
 typedef	struct s_pipex
 {
@@ -41,4 +38,8 @@ typedef struct s_cmd
 	int		out_fd;
 }	t_cmd;
 
+void	make_list(char **argv, t_list **lst);
+int		open_file1(char **argv);
+int		open_file2(int argc, char **argv);
+void	open_files(t_pipex *pipex, int argc, char **argv);
 #endif

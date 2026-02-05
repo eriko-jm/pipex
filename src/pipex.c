@@ -19,12 +19,12 @@ int	main(int argc, char **argv)
 	
 	if (argc != 5)
 	{
-		perro("argumentos");
+		perror("argumentos");
 		return (1);
 	}
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
-		return (NULL);
+		return (1);
 	lst = NULL;
 	make_list(argv, &lst);
 	open_files(pipex, argc, argv);
@@ -33,6 +33,6 @@ int	main(int argc, char **argv)
 
 void	open_files(t_pipex *pipex, int argc, char **argv)
 {
-	pipex->file1_fd = open_file1(argv);
 	pipex->file2_fd = open_file2(argc, argv);
+	pipex->file1_fd = open_file1(argv);
 }
