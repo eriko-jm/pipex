@@ -35,4 +35,5 @@ void	open_files(t_pipex *pipex, int argc, char **argv)
 {
 	pipex->file2_fd = open_file2(argc, argv);
 	pipex->file1_fd = open_file1(argv);
+	pipex->nb_cmd = argc - 3;
 }
