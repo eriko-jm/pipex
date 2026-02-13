@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   processes.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 20:02:08 by joaseque          #+#    #+#             */
+/*   Updated: 2026/02/13 20:02:08 by joaseque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pipex.h"
 
 void	primer_hijo(t_list **lst, t_pipex *pipex)
 {
 	t_list	*current;
-	
+	int		fd[2];
+
 	current = (*lst);
 	pipex->prev_fd = pipex->file1_fd;
 	while (current != NULL)
 	{
-		int		fd[2];
 		if (current->next != NULL)
 		{
 			pipe(fd);
@@ -25,5 +36,3 @@ void	primer_hijo(t_list **lst, t_pipex *pipex)
 		current = current->next;
 	}
 }
-
-

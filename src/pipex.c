@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_list	*lst;
 	t_pipex	*pipex;
-	
+
 	if (argc != 5)
 	{
 		perror("argumentos");

@@ -36,6 +36,7 @@ void	make_list(char **argv, t_list **lst)
 		i++;
 	}
 }
+
 int	open_file1(char **argv)
 {
 	int	fd;
@@ -47,7 +48,7 @@ int	open_file1(char **argv)
 		{
 			perror (argv[1]);
 			exit (1);
-		}		
+		}
 	}
 	else
 	{
@@ -62,10 +63,10 @@ int	open_file2(int argc, char **argv)
 	int	fd;
 
 	fd = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (fd < 0)
-		{
-			perror (argv[argc - 1]);
-			exit (1);
-		}
+	if (fd < 0)
+	{
+		perror (argv[argc - 1]);
+		exit (1);
+	}
 	return (fd);
 }
