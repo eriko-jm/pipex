@@ -21,9 +21,7 @@
 # include <string.h>
 //# include <sys/wait.h>
 
-
-
-typedef	struct s_pipex
+typedef struct s_pipex
 {
 	int		file1_fd;
 	int		file2_fd;

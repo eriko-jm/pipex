@@ -11,6 +11,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC =	src/pipex.c \
 		src/processes.c \
+		src/path.c \
+		src/parse.c \
 		
 
 OBJS = $(SRC:.c=.o)
