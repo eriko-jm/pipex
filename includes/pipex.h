@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <string.h>
-//# include <sys/wait.h>
+# include <sys/wait.h>
 
 typedef struct s_pipex
 {
@@ -42,4 +42,5 @@ void	make_list(char **argv, t_list **lst);
 int		open_file1(char **argv);
 int		open_file2(int argc, char **argv);
 void	open_files(t_pipex *pipex, int argc, char **argv);
+char	*find_path(char **env, char *command);
 #endif
