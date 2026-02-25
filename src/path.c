@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 20:01:58 by joaseque          #+#    #+#             */
-/*   Updated: 2026/02/13 20:09:32 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:20:50 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ char	*find_path(char **env, char *command)
 	valid_path = NULL;
 	str = get_path(env);
 	arr = ft_split(str, ':');
+	command = ft_strtrim(command, " ");
+	command = ft_strcut(command, ' ');
 	arr = add_path_command(arr, command);
 	while (arr[i] && access(arr[i], X_OK) != 0)
 		i++;
@@ -105,7 +107,7 @@ char	*find_path(char **env, char *command)
 		free_arr(arr);
 		return (NULL);
 	}
-	valid_path = arr[i];
+	valid_path = ft_strdup(arr[i]);
 	free_arr(arr);
 	return (valid_path);
 }

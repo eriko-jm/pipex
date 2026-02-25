@@ -56,6 +56,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strcut(char *str, int c);
 
 typedef struct s_list
 {
