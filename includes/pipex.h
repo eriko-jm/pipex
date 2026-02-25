@@ -32,6 +32,7 @@ typedef struct s_pipex
 typedef struct s_cmd
 {
 	char	**arg;
+	char	*command;
 	char	*path;
 	pid_t	pid;
 	int		in_fd;
@@ -43,4 +44,6 @@ int		open_file1(char **argv);
 int		open_file2(int argc, char **argv);
 void	open_files(t_pipex *pipex, int argc, char **argv);
 char	*find_path(char **env, char *command);
+void	do_procces(t_list **lst, t_pipex *pipex, char **env);
+
 #endif

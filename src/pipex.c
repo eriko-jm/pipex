@@ -28,6 +28,7 @@ int	main(int argc, char **argv, char **env)
 	lst = NULL;
 	make_list(argv, &lst);
 	open_files(pipex, argc, argv);
+	do_procces(&lst, pipex, env);
 	return (0);
 }
 

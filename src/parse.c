@@ -23,7 +23,8 @@ void	make_list(char **argv, t_list **lst)
 	{
 		cmd = malloc(sizeof(t_cmd));
 		if (!cmd)
-			return (NULL);
+			return ;
+		cmd->command = argv[i];
 		cmd->arg = ft_split(argv[i], ' ');
 		cmd->path = NULL;
 		node = ft_lstnew(cmd);
