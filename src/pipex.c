@@ -35,7 +35,6 @@ int	main(int argc, char **argv, char **env)
 	open_files(pipex, argc, argv);
 	do_procces(&lst, pipex, env);
 	close(pipex->file2_fd);
-	close(pipex->file1_fd);
 	return (0);
 }
 

@@ -67,9 +67,9 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 	2. obviar busqueda del path en caso de que la manden
 	3. hacerlo solo con los comandos que las usen necesitando "find_path" para las que no
 
-2. revisar fd's abiertos
+2. revisar leaks de memoria
 
-3. revisar leaks de memoria
+3. revisar cierre correcto de hijos
 
-4. revisar cierre correcto de hijos
+4. norminete
 */
