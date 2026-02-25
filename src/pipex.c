@@ -22,6 +22,11 @@ int	main(int argc, char **argv, char **env)
 		perror("argumentos");
 		return (1);
 	}
+	if(!env)
+	{
+		perror("non existing env");
+		return(-1);
+	}
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
 		return (1);
@@ -29,6 +34,8 @@ int	main(int argc, char **argv, char **env)
 	make_list(argv, &lst);
 	open_files(pipex, argc, argv);
 	do_procces(&lst, pipex, env);
+	close(pipex->file2_fd);
+	close(pipex->file1_fd);
 	return (0);
 }
 

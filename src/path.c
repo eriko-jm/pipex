@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 20:01:58 by joaseque          #+#    #+#             */
-/*   Updated: 2026/02/25 20:20:50 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/02/25 20:57:20 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*get_path(char **env)
 	int		i;
 	char	*str;
 
+	if (!(env && *env && **env))
+		return (NULL);
 	i = 0;
 	while (ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
@@ -29,6 +31,8 @@ static void	copy_arr(char *tmp, char *arr, char *command)
 	int	i;
 	int	j;
 
+	if (!(tmp && arr && *arr && command && *command))
+		return ;
 	i = 0;
 	j = 0;
 	while (arr[i] != '\0')
@@ -53,6 +57,8 @@ static char	**add_path_command(char **arr, char *command)
 	char	**new_arr;
 	char	*tmp;
 
+	if (!(arr && *arr && command && *command))
+		return (NULL);
 	i = 0;
 	new_arr = malloc(sizeof(char *) * (count_arr(arr) + 1));
 	if (!new_arr)
@@ -92,6 +98,8 @@ char	*find_path(char **env, char *command)
 	char	*valid_path;
 	int		i;
 
+	if (!(env && *env && command && *command))
+		return (NULL);
 	i = 0;
 	valid_path = NULL;
 	str = get_path(env);
