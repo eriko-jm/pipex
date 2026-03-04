@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 20:01:58 by joaseque          #+#    #+#             */
-/*   Updated: 2026/03/04 15:10:19 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/03/04 17:24:02 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,28 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-char	*find_path(char **env, char *command)
+char	*find_path(char **env, char *command, t_pipex *pipex)
 {
-	char	*valid_path;
+	char	*trimmed;
 
 	if (!(env && *env && command && *command))
 		return (NULL);
-	command = ft_strtrim(command, " ");
-	if (command[0] == '/')
-		return (command);
+	trimmed = ft_strtrim(command, " ");
+	if (trimmed[0] == '/')
+	{
+		if (access(trimmed, X_OK) == 0)
+			return (trimmed);
+		else
+		{
+			free(trimmed);
+			return (NULL);
+		}
+	}
 	else
 	{
-		valid_path = NULL;
-		valid_path = find_path2(env, command);
-		return (valid_path);	
+		pipex->valid_path = NULL;
+		pipex->valid_path = find_path2(env, trimmed, pipex);
+		free(trimmed);
+		return (pipex->valid_path);	
 	}
 }

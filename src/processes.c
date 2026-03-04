@@ -12,30 +12,32 @@
 
 #include "pipex.h"
 
-char	*find_path2(char **env, char *command)
+char	*find_path2(char **env, char *command, t_pipex *pipex)
 {
 	char	*str;
-	char	**arr;
-	char	*valid_path;
 	int		i;
+	char	**tmp_arr;
 
 	i = 0;
 	command = ft_strcut(command, ' ');
-	valid_path = NULL;
+	pipex->valid_path = NULL;
 	str = get_path(env);
-	arr = ft_split(str, ':');
-	arr = add_path_command(arr, command);
-	while (arr[i] && access(arr[i], X_OK) != 0)
+	tmp_arr = ft_split(str, ':');
+	pipex->path_arr = add_path_command(tmp_arr, command);
+	free_arr(tmp_arr);
+	while (pipex->path_arr[i] && access(pipex->path_arr[i], X_OK) != 0)
 		i++;
-	if (!arr[i])
+	if (!pipex->path_arr[i])
 	{
 		perror("command not found");
-		free_arr(arr);
+		free_arr(pipex->path_arr);
+		free(command);
 		return (NULL);
 	}
-	valid_path = ft_strdup(arr[i]);
-	free_arr(arr);
-	return (valid_path);
+	pipex->valid_path = ft_strdup(pipex->path_arr[i]);
+	free_arr(pipex->path_arr);
+	free(command);
+	return (pipex->valid_path);
 }
 
 void	do_procces(t_list **lst, t_pipex *pipex, char **env)
@@ -49,7 +51,7 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 	while (current != NULL)
 	{
 		cmd = (t_cmd *)current->content;
-		cmd->path = find_path(env, cmd->command);
+		cmd->path = find_path(env, cmd->command, pipex);
 		if (!cmd->path)
 			perror("no path found");
 		if (current->next)

@@ -12,6 +12,25 @@
 
 #include "pipex.h"
 
+void	free_lst(t_list *lst)
+{
+	t_list	*current;
+	t_list	*tmp;
+	t_cmd	*cmd;
+
+	current = lst;
+	while (current)
+	{
+		cmd = current->content;
+		free_arr(cmd->arg);
+		free(cmd->path);
+		free(cmd);
+		tmp = current;
+		current = current->next;
+		free(tmp);
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_list	*lst;
@@ -34,7 +53,10 @@ int	main(int argc, char **argv, char **env)
 	make_list(argv, &lst);
 	open_files(pipex, argc, argv);
 	do_procces(&lst, pipex, env);
+	free_lst(lst);
 	close(pipex->file2_fd);
+	close(pipex->file1_fd);
+	free(pipex);
 	return (0);
 }
 

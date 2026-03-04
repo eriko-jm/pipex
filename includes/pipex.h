@@ -27,6 +27,8 @@ typedef struct s_pipex
 	int		file2_fd;
 	int		prev_fd;
 	int		nb_cmd;
+	char	*valid_path;
+	char	**path_arr;
 }	t_pipex;
 
 typedef struct s_cmd
@@ -42,8 +44,8 @@ typedef struct s_cmd
 int		open_file1(char **argv);
 int		open_file2(int argc, char **argv);
 /**/
-char	*find_path(char **env, char *command);
-char	*find_path2(char **env, char *command);
+char	*find_path(char **env, char *command, t_pipex *pipex);
+char	*find_path2(char **env, char *command, t_pipex *pipex);
 char	*get_path(char **env);
 char	**add_path_command(char **arr, char *command);
 /**/
@@ -52,5 +54,6 @@ void	make_list(char **argv, t_list **lst);
 void	do_procces(t_list **lst, t_pipex *pipex, char **env);
 void	copy_arr(char *tmp, char *arr, char *command);
 void	free_arr(char **arr);
+void	free_lst(t_list *lst);
 
 #endif
