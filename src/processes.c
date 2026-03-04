@@ -77,7 +77,6 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 		{
 			close(fd[1]);
 			pipex->prev_fd = fd[0];
-			//close(fd[0]);
 		}
 		current = current->next;
 	}
@@ -85,14 +84,7 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 
 
 /*
-1. implementar rutas absolutas
-	1. mandarlas directamente a execve
-	2. obviar busqueda del path en caso de que la manden
-	3. hacerlo solo con los comandos que las usen necesitando "find_path" para las que no
-
 2. revisar leaks de memoria
-
-3. revisar cierre correcto de hijos
 
 4. norminete
 */
