@@ -44,7 +44,7 @@ int	open_file1(char **argv)
 
 	if (access(argv[1], F_OK) == 0)
 	{
-		fd = open(argv[1], O_RDONLY | O_TRUNC, 0644);
+		fd = open(argv[1], O_RDONLY , 0644);
 		if (fd < 0)
 		{
 			perror (argv[1]);

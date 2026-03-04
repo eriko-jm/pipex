@@ -39,11 +39,18 @@ typedef struct s_cmd
 	int		out_fd;
 }	t_cmd;
 
-void	make_list(char **argv, t_list **lst);
 int		open_file1(char **argv);
 int		open_file2(int argc, char **argv);
-void	open_files(t_pipex *pipex, int argc, char **argv);
+/**/
 char	*find_path(char **env, char *command);
+char	*find_path2(char **env, char *command);
+char	*get_path(char **env);
+char	**add_path_command(char **arr, char *command);
+/**/
+void	open_files(t_pipex *pipex, int argc, char **argv);
+void	make_list(char **argv, t_list **lst);
 void	do_procces(t_list **lst, t_pipex *pipex, char **env);
+void	copy_arr(char *tmp, char *arr, char *command);
+void	free_arr(char **arr);
 
 #endif

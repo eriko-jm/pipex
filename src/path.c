@@ -6,13 +6,13 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 20:01:58 by joaseque          #+#    #+#             */
-/*   Updated: 2026/02/25 20:57:20 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/03/04 15:10:19 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*get_path(char **env)
+char	*get_path(char **env)
 {
 	int		i;
 	char	*str;
@@ -26,7 +26,7 @@ static char	*get_path(char **env)
 	return (str + 5);
 }
 
-static void	copy_arr(char *tmp, char *arr, char *command)
+void	copy_arr(char *tmp, char *arr, char *command)
 {
 	int	i;
 	int	j;
@@ -51,7 +51,7 @@ static void	copy_arr(char *tmp, char *arr, char *command)
 	tmp[i] = '\0';
 }
 
-static char	**add_path_command(char **arr, char *command)
+char	**add_path_command(char **arr, char *command)
 {
 	int		i;
 	char	**new_arr;
@@ -76,7 +76,7 @@ static char	**add_path_command(char **arr, char *command)
 	return (new_arr);
 }
 
-static void	free_arr(char **arr)
+void	free_arr(char **arr)
 {
 	int	i;
 
@@ -93,29 +93,17 @@ static void	free_arr(char **arr)
 
 char	*find_path(char **env, char *command)
 {
-	char	*str;
-	char	**arr;
 	char	*valid_path;
-	int		i;
 
 	if (!(env && *env && command && *command))
 		return (NULL);
-	i = 0;
-	valid_path = NULL;
-	str = get_path(env);
-	arr = ft_split(str, ':');
 	command = ft_strtrim(command, " ");
-	command = ft_strcut(command, ' ');
-	arr = add_path_command(arr, command);
-	while (arr[i] && access(arr[i], X_OK) != 0)
-		i++;
-	if (!arr[i])
+	if (command[0] == '/')
+		return (command);
+	else
 	{
-		perror("command not found");
-		free_arr(arr);
-		return (NULL);
+		valid_path = NULL;
+		valid_path = find_path2(env, command);
+		return (valid_path);	
 	}
-	valid_path = ft_strdup(arr[i]);
-	free_arr(arr);
-	return (valid_path);
 }

@@ -12,6 +12,32 @@
 
 #include "pipex.h"
 
+char	*find_path2(char **env, char *command)
+{
+	char	*str;
+	char	**arr;
+	char	*valid_path;
+	int		i;
+
+	i = 0;
+	command = ft_strcut(command, ' ');
+	valid_path = NULL;
+	str = get_path(env);
+	arr = ft_split(str, ':');
+	arr = add_path_command(arr, command);
+	while (arr[i] && access(arr[i], X_OK) != 0)
+		i++;
+	if (!arr[i])
+	{
+		perror("command not found");
+		free_arr(arr);
+		return (NULL);
+	}
+	valid_path = ft_strdup(arr[i]);
+	free_arr(arr);
+	return (valid_path);
+}
+
 void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 {
 	t_list	*current;
@@ -25,10 +51,7 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 		cmd = (t_cmd *)current->content;
 		cmd->path = find_path(env, cmd->command);
 		if (!cmd->path)
-		{
 			perror("no path found");
-			return ;
-		}
 		if (current->next)
 			pipe(fd);
 		cmd->pid = fork();
@@ -54,7 +77,7 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 		{
 			close(fd[1]);
 			pipex->prev_fd = fd[0];
-			close(fd[0]);
+			//close(fd[0]);
 		}
 		current = current->next;
 	}
