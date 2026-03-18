@@ -1,7 +1,7 @@
 
 NAME = pipex
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs
 RM = rm -fr
