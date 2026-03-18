@@ -52,6 +52,7 @@ char	**add_path_command(char **arr, char *command);
 void	open_files(t_pipex *pipex, int argc, char **argv);
 void	make_list(char **argv, t_list **lst);
 void	do_procces(t_list **lst, t_pipex *pipex, char **env);
+void	exec_child(t_list *current, t_pipex *pipex, int *fd, char **env);
 void	copy_arr(char *tmp, char *arr, char *command);
 void	free_arr(char **arr);
 void	free_lst(t_list *lst);

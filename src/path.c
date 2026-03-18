@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 20:01:58 by joaseque          #+#    #+#             */
-/*   Updated: 2026/03/04 17:24:02 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/03/18 20:31:28 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ char	*find_path(char **env, char *command, t_pipex *pipex)
 		pipex->valid_path = NULL;
 		pipex->valid_path = find_path2(env, trimmed, pipex);
 		free(trimmed);
-		return (pipex->valid_path);	
+		return (pipex->valid_path);
 	}
 }

@@ -41,10 +41,10 @@ int	main(int argc, char **argv, char **env)
 		perror("argumentos");
 		return (1);
 	}
-	if(!env)
+	if (!env)
 	{
 		perror("non existing env");
-		return(-1);
+		return (-1);
 	}
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
