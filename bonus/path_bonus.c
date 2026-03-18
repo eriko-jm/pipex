@@ -1,0 +1,118 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/13 20:01:58 by joaseque          #+#    #+#             */
+/*   Updated: 2026/03/18 21:58:11 by joaseque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pipex_bonus.h"
+
+char	*get_path(char **env)
+{
+	int		i;
+	char	*str;
+
+	if (!(env && *env && **env))
+		return (NULL);
+	i = 0;
+	while (ft_strncmp(env[i], "PATH", 4) != 0)
+		i++;
+	str = env[i];
+	return (str + 5);
+}
+
+void	copy_arr(char *tmp, char *arr, char *command)
+{
+	int	i;
+	int	j;
+
+	if (!(tmp && arr && *arr && command && *command))
+		return ;
+	i = 0;
+	j = 0;
+	while (arr[i] != '\0')
+	{
+		tmp[i] = arr[i];
+		i++;
+	}
+	tmp[i] = '/';
+	i++;
+	while (command[j] != '\0')
+	{
+		tmp[i] = command[j];
+		i++;
+		j++;
+	}
+	tmp[i] = '\0';
+}
+
+char	**add_path_command(char **arr, char *command)
+{
+	int		i;
+	char	**new_arr;
+	char	*tmp;
+
+	if (!(arr && *arr && command && *command))
+		return (NULL);
+	i = 0;
+	new_arr = malloc(sizeof(char *) * (count_arr(arr) + 1));
+	if (!new_arr)
+		return (NULL);
+	while (arr[i] != NULL)
+	{
+		tmp = malloc(ft_strlen(arr[i]) + 1 + ft_strlen(command) + 1);
+		if (!tmp)
+			return (NULL);
+		copy_arr(tmp, arr[i], command);
+		new_arr[i] = tmp;
+		i++;
+	}
+	new_arr[i] = NULL;
+	return (new_arr);
+}
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+char	*find_path(char **env, char *command, t_pipex *pipex)
+{
+	char	*trimmed;
+
+	if (!(env && *env && command && *command))
+		return (NULL);
+	trimmed = ft_strtrim(command, " ");
+	if (trimmed[0] == '/')
+	{
+		if (access(trimmed, X_OK) == 0)
+			return (trimmed);
+		else
+		{
+			free(trimmed);
+			return (NULL);
+		}
+	}
+	else
+	{
+		pipex->valid_path = NULL;
+		pipex->valid_path = find_path2(env, trimmed, pipex);
+		free(trimmed);
+		return (pipex->valid_path);
+	}
+}
