@@ -53,16 +53,16 @@ int	main(int argc, char **argv, char **env)
 	make_list(argv, &lst);
 	open_files(pipex, argc, argv);
 	do_procces(&lst, pipex, env);
-	free_lst(lst);
 	close(pipex->file2_fd);
 	close(pipex->file1_fd);
+	free_lst(lst);
 	free(pipex);
 	return (0);
 }
 
 void	open_files(t_pipex *pipex, int argc, char **argv)
 {
-	pipex->file2_fd = open_file2(argc, argv);
 	pipex->file1_fd = open_file1(argv);
+	pipex->file2_fd = open_file2(argc, argv);
 	pipex->nb_cmd = argc - 3;
 }

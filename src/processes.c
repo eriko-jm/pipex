@@ -79,6 +79,7 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 		{
 			close(fd[1]);
 			pipex->prev_fd = fd[0];
+			//close(fd[0]);
 		}
 		current = current->next;
 	}
