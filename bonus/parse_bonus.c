@@ -12,14 +12,14 @@
 
 #include "pipex_bonus.h"
 
-void	make_list(char **argv, t_list **lst)
+void	make_list(char **argv, t_list **lst, int argc)
 {
 	int		i;
 	t_cmd	*cmd;
 	t_list	*node;
 
 	i = 2;
-	while (i < 4)
+	while (i < argc - 1)
 	{
 		cmd = malloc(sizeof(t_cmd));
 		if (!cmd)
