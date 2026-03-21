@@ -48,7 +48,7 @@ void	here_doc(t_pipex *pipex, char *limiter)
 	len = ft_strlen(limiter);
 	while (1)
 	{
-		write(1, "Here, doc> ", 12);
+		write(1, "Here, doc> ", 11);
 		line = get_next_line(0);
 		if (!line)
 			break ;
