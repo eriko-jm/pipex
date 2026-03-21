@@ -12,44 +12,33 @@
 
 #include "libft.h"
 
+static void	ft_copys(char *str, char const *s, size_t start)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		str[start + i] = s[i];
+		i++;
+	}
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	lens[2];
-	size_t	i;
+	size_t	len1;
+	size_t	len2;
 	char	*str;
 
 	if (!s1 || !s2)
 		return (NULL);
-	lens[0] = ft_strlen(s1);
-	lens[1] = ft_strlen(s2);
-	str = malloc(sizeof(char) * ((lens[0] + lens[1]) + 1));
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	str = malloc(sizeof(char) * (len1 + len2 + 1));
 	if (!str)
 		return (NULL);
-	i = -1;
-	while (i != lens[0])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	i = 0;
-	while (i != lens[1])
-	{
-		str[lens[0]] = s2[i++];
-		lens[0]++;
-	}
-	str[lens[0]] = '\0';
+	ft_copys(str, s1, 0);
+	ft_copys(str, s2, len1);
+	str[len1 + len2] = '\0';
 	return (str);
 }
-
-/*#include <stdio.h>
-
-int	main ()
-{
-	char *s1 = "PUTAAAAAAAAAAAAAAAAAAAAAA ";
-	char *s2 = "MADREEEEEE\n";
-	char *ptr;
-	
-	ptr = ft_strjoin(s1, s2);
-	printf("%s\n", ptr);
-	return (0);
-}*/

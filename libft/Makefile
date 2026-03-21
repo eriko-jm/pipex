@@ -66,6 +66,7 @@ SRCS = 	ft_isalpha.c \
 		ft_lstmap_bonus.c \
 		count_arr.c \
 		ft_strcut.c \
+		get_next_line.c \
 
 OBJS = $(SRCS:.c=.o)
 

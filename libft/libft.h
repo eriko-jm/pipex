@@ -12,6 +12,11 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -58,13 +63,13 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strcut(char *str, int c);
 
+//bonus ->
+
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
-//bonus ->
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -86,5 +91,9 @@ int		print_hex_upp(unsigned int nb);
 int		print_ptr(void *ptr);
 int		print_hex_low(unsigned int nb);
 int		ft_printf(char const *str, ...);
+
+//gnl ->
+
+char	*get_next_line(int fd);
 
 #endif
