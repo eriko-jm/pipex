@@ -38,7 +38,7 @@ void	open_files(t_pipex *pipex, int argc, char **argv)
 		here_doc(pipex, argv[2]);
 		pipex->flag_here_doc = 3;
 		pipex->file2_fd = open(argv[argc - 1],
-			O_CREAT | O_WRONLY | O_APPEND, 0644);
+				O_CREAT | O_WRONLY | O_APPEND, 0644);
 	}
 	else
 	{
@@ -46,6 +46,15 @@ void	open_files(t_pipex *pipex, int argc, char **argv)
 		pipex->flag_here_doc = 2;
 		pipex->file2_fd = open_file2(argc, argv);
 	}
+}
+
+static void	clean_up(t_pipex *pipex, t_list *lst)
+{
+	if (pipex->flag_here_doc != 3)
+		close(pipex->file1_fd);
+	close(pipex->file2_fd);
+	free_lst(lst);
+	free(pipex);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -70,10 +79,6 @@ int	main(int argc, char **argv, char **env)
 	open_files(pipex, argc, argv);
 	make_list(argv, &lst, pipex, argc);
 	do_procces(&lst, pipex, env);
-	if (pipex->flag_here_doc != 3)
-		close(pipex->file1_fd);
-	close(pipex->file2_fd);
-	free_lst(lst);
-	free(pipex);
+	clean_up(pipex, lst);
 	return (0);
 }

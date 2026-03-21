@@ -49,7 +49,10 @@ void	exec_child(t_list *current, t_pipex *pipex, int *fd, char **env)
 	if (current->next)
 		dup2(fd[1], STDOUT_FILENO);
 	else
+	{
 		dup2(pipex->file2_fd, STDOUT_FILENO);
+		close(pipex->file2_fd);
+	}
 	close(pipex->prev_fd);
 	if (current->next)
 	{
@@ -59,6 +62,27 @@ void	exec_child(t_list *current, t_pipex *pipex, int *fd, char **env)
 	execve(cmd->path, cmd->arg, env);
 	perror("execve");
 	exit(1);
+}
+
+static void	proces_node(t_list *current, t_pipex *pipex, int *fd, char **env)
+{
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)current->content;
+	cmd->path = find_path(env, cmd->command, pipex);
+	if (!cmd->path)
+		perror("no path found");
+	if (current->next)
+		pipe(fd);
+	cmd->pid = fork();
+	if (cmd->pid == 0)
+		exec_child(current, pipex, fd, env);
+	close(pipex->prev_fd);
+	if (current->next)
+	{
+		close(fd[1]);
+		pipex->prev_fd = fd[0];
+	}
 }
 
 void	do_procces(t_list **lst, t_pipex *pipex, char **env)
@@ -71,21 +95,14 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 	pipex->prev_fd = pipex->file1_fd;
 	while (current != NULL)
 	{
+		proces_node(current, pipex, fd, env);
+		current = current->next;
+	}
+	current = (*lst);
+	while (current)
+	{
 		cmd = (t_cmd *)current->content;
-		cmd->path = find_path(env, cmd->command, pipex);
-		if (!cmd->path)
-			perror("no path found");
-		if (current->next)
-			pipe(fd);
-		cmd->pid = fork();
-		if (cmd->pid == 0)
-			exec_child(current, pipex, fd, env);
-		close(pipex->prev_fd);
-		if (current->next)
-		{
-			close(fd[1]);
-			pipex->prev_fd = fd[0];
-		}
+		waitpid(cmd->pid, NULL, 0);
 		current = current->next;
 	}
 }
