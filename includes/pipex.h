@@ -26,7 +26,6 @@ typedef struct s_pipex
 	int		file1_fd;
 	int		file2_fd;
 	int		prev_fd;
-	int		nb_cmd;
 	char	*valid_path;
 	char	**path_arr;
 }	t_pipex;

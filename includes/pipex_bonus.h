@@ -6,7 +6,7 @@
 /*   By: joaseque <joaseque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 21:39:44 by joaseque          #+#    #+#             */
-/*   Updated: 2026/03/20 17:48:10 by joaseque         ###   ########.fr       */
+/*   Updated: 2026/03/21 18:57:56 by joaseque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_pipex
 	int		file1_fd;
 	int		file2_fd;
 	int		prev_fd;
-	int		nb_cmd;
+	int		flag_here_doc;
 	char	*valid_path;
 	char	**path_arr;
 }	t_pipex;
@@ -50,7 +50,8 @@ char	*get_path(char **env);
 char	**add_path_command(char **arr, char *command);
 /**/
 void	open_files(t_pipex *pipex, int argc, char **argv);
-void	make_list(char **argv, t_list **lst, int argc);
+void	make_list(char **argv, t_list **lst, t_pipex *pipex, int argc);
+void	here_doc(t_pipex *pipex, char *limiter);
 void	do_procces(t_list **lst, t_pipex *pipex, char **env);
 void	exec_child(t_list *current, t_pipex *pipex, int *fd, char **env);
 void	copy_arr(char *tmp, char *arr, char *command);

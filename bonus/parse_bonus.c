@@ -12,13 +12,13 @@
 
 #include "pipex_bonus.h"
 
-void	make_list(char **argv, t_list **lst, int argc)
+void	make_list(char **argv, t_list **lst, t_pipex *pipex, int argc)
 {
 	int		i;
 	t_cmd	*cmd;
 	t_list	*node;
 
-	i = 2;
+	i = pipex->flag_here_doc;
 	while (i < argc - 1)
 	{
 		cmd = malloc(sizeof(t_cmd));
@@ -36,6 +36,32 @@ void	make_list(char **argv, t_list **lst, int argc)
 		ft_lstadd_back(lst, node);
 		i++;
 	}
+}
+
+void	here_doc(t_pipex *pipex, char *limiter)
+{
+	int		fd[2];
+	int		len;
+	char	*line;
+
+	pipe(fd);
+	len = ft_strlen(limiter);
+	while (1)
+	{
+		write(1, "Here, doc> ", 12);
+		line = get_next_line(0);
+		if (!line)
+			break ;
+		if (ft_strncmp(line, limiter, len) == 0 && line[len] == '\n')
+		{
+			free (line);
+			break ;
+		}
+		write(fd[1], line, ft_strlen(line));
+		free(line);
+	}
+	close(fd[1]);
+	pipex->file1_fd = fd[0];
 }
 
 int	open_file1(char **argv)

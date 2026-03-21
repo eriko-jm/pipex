@@ -49,7 +49,10 @@ void	exec_child(t_list *current, t_pipex *pipex, int *fd, char **env)
 	if (current->next)
 		dup2(fd[1], STDOUT_FILENO);
 	else
+	{
 		dup2(pipex->file2_fd, STDOUT_FILENO);
+		close(pipex->file2_fd);
+	}
 	close(pipex->prev_fd);
 	if (current->next)
 	{
@@ -87,5 +90,12 @@ void	do_procces(t_list **lst, t_pipex *pipex, char **env)
 			pipex->prev_fd = fd[0];
 		}
 		current = current->next;
+	}
+	current = (*lst);
+	while (current)
+	{
+	    cmd = (t_cmd *)current->content;
+	    waitpid(cmd->pid, NULL, 0);
+	    current = current->next;
 	}
 }
