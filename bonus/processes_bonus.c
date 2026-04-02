@@ -58,7 +58,10 @@ void	exec_child(t_list *current, t_pipex *pipex, int *fd, char **env)
 	{
 		close(fd[0]);
 		close(fd[1]);
+		close(pipex->file2_fd);
 	}
+	if (!cmd->path)
+		exit (1);
 	execve(cmd->path, cmd->arg, env);
 	perror("execve");
 	exit(1);
