@@ -1,26 +1,26 @@
 # pipex
 
-*Este proyecto ha sido creado como parte del currículo de 42 por joaseque.*
+*This project has been created as part of the 42 curriculum by joaseque.*
 
-## Descripcion:
-- Pipex es un proyecto culla funcion es simular los pipes de Unix (|) en C, ejecutando comandos de forma encadenada, recibiendo input de un archivo "infile" y mandandolo a un archivo "outfile".
+## Description:
+- Pipex is a project whose purpose is to simulate Unix pipes (|) in C, executing commands in a chained manner, taking input from an "infile" and sending the output to an "outfile".
 
-## Instrucciones:
-- Se usara el comando "make" para compilar el programa.
-- Se ejecuta el programa de la siguiente forma: (./pipex "infile" "cmd1" "cmd2" "outfile").
-- El infile debe de estar creado antes de ejecutar el programa.
+## Instructions:
+- The "make" command will be used to compile the program.
+- The program is executed as follows: (./pipex "infile" "cmd1" "cmd2" "outfile").
+- The infile must be created before running the program.
 
-## Recursos:
-- Manuales sobre las funciones autorizadas; *man pipe*, *man fork*, *man execve*, etc.
-- uso de claude para explicaciones mas extensas sobre las funciones autorizadas y para entender que errores he ido encontrando.
+## Resources:
+- Manuals for the authorized functions; *man pipe*, *man fork*, *man execve*, etc.
+- Use of Claude for more detailed explanations of the authorized functions and to understand the errors encountered during development.
 
 # pipex_bonus
 
-## Descripción:
-- La parte bonus hace que pipex sea capaz de manejar tantos comandos como se desee y tambien el uso de here_doc.
+## Description:
+- The bonus part allows pipex to handle as many commands as desired and also supports the use of here_doc.
 
-## Instrucciones:
-- Se usara el comando "make bonus" para compilar la parte bonus.
-- Se ejecuta el programa de la siguiente forma: (./pipex_bonus "infile" "cmd1" "cmd2" "cmd3" ... "outfile").
-- Si se quiere utilizar el here_doc se debe ejecutar de esta forma: (./pipex_bonus "here_doc" "LIMITER" "cmd1" "cmd2" ... "outfile").
-- En caso de no usar here_doc el infile debe de estar creado antes de ejecutar el programa.
+## Instructions:
+- The "make bonus" command will be used to compile the bonus part.
+- The program is executed as follows: (./pipex_bonus "infile" "cmd1" "cmd2" "cmd3" ... "outfile").
+- To use here_doc, it should be executed as follows: (./pipex_bonus "here_doc" "LIMITER" "cmd1" "cmd2" ... "outfile").
+- If here_doc is not used, the infile must be created before running the program.
